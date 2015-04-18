@@ -7,10 +7,19 @@ import java.util.Map;
 import java.util.Set;
 
 import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.utility.ChatMessage;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ConfigurationHandler {
 	
@@ -53,15 +62,19 @@ public class ConfigurationHandler {
 
 		int[] newPlot = {plotX, plotZ};
 		
+		EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().getPlayerByUsername(plotOwner);
+		
 		// Check to see if the plot is already registered elsewhere
 		for (int[] values : plotList.values()) {
 			
 			if (values[0] == newPlot[0] && values[1] == newPlot[1]) {
 				
-				System.out.println("You already have this plot!");
+				ChatMessage.sendMessage(player, "You already have this plot!");
 				return;
 			}	
 		}
+		
+		ChatMessage.sendMessage(player, "You have purchased this plot of land!");
 		
 		plotList.put(plotList.size(), newPlot);
 		

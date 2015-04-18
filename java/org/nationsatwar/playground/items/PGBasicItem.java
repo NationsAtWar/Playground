@@ -15,13 +15,12 @@ public class PGBasicItem extends Item {
 		
 		super();
 		
-		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setUnlocalizedName(unlocalizedName);
+		setCreativeTab(CreativeTabs.tabMisc);
+		setMaxStackSize(64);
 	}
 	
-	@Override
-    public EnumAction getItemUseAction(ItemStack stack)
-    {
-        return EnumAction.NONE;
-    }
+	// Make item not disappear on item use on block
+	// Make Utility API
+	// Make GUI Confirmation Screen
 }

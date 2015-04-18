@@ -1,20 +1,23 @@
-package org.nationsatwar.playground;
+package org.nationsatwar.playground.events;
 
 import java.awt.event.ItemEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.nationsatwar.playground.init.PGItems;
+import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.init.InitializeItems;
 
 import akka.event.Logging.Debug;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class TutorialEventHandler {
+public class PlotProtectionEvents {
 	
 	@SubscribeEvent
 	public void breakBlock(BlockEvent.BreakEvent event) {
@@ -60,35 +63,5 @@ public class TutorialEventHandler {
 					event.setCanceled(true);
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public void useDeed1(PlayerUseItemEvent.Tick event) {
-
-		System.out.println(event.item.getDisplayName());
-	}
-	
-	@SubscribeEvent
-	public void useDeed2(PlayerUseItemEvent.Finish event) {
-
-		System.out.println(event.item.getDisplayName());
-	}
-	
-	@SubscribeEvent
-	public void useDeed3(PlayerUseItemEvent.Start event) {
-		
-		System.out.println(event.item.getDisplayName());
-		
-		if (event.item.getDisplayName().equals("plot_deed"))
-			return;
-	}
-	
-	@SubscribeEvent
-	public void useDeed4(PlayerUseItemEvent.Stop event) {
-		
-		System.out.println(event.item.getDisplayName());
-		
-		if (event.item.getDisplayName().equals("plot_deed"))
-			return;
 	}
 }

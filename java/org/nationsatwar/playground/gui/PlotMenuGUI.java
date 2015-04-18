@@ -1,17 +1,26 @@
-package org.nationsatwar.playground;
+package org.nationsatwar.playground.gui;
 
-import org.nationsatwar.playground.init.PGItems;
+import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.init.InitializeItems;
+import org.nationsatwar.playground.items.PGItemPlotDeed;
+import org.nationsatwar.playground.packets.PacketBuyPlot;
+import org.nationsatwar.playground.packets.PacketGiveDeed;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S2FPacketSetSlot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class GuiBasic extends GuiScreen {
+public class PlotMenuGUI extends GuiScreen {
 	
 	private ResourceLocation backgroundimage = new ResourceLocation(Playground.MODID + ":" + 
 			"textures/client/gui/GuiBackground.png");
@@ -24,7 +33,7 @@ public class GuiBasic extends GuiScreen {
 	
 	public static final int GUI_ID = 20;
 	
-	public GuiBasic(EntityPlayer player, World world, int x, int y, int z) {
+	public PlotMenuGUI(EntityPlayer player, World world, int x, int y, int z) {
 		
 		this.x = x;
 		this.y = y;
@@ -70,17 +79,20 @@ public class GuiBasic extends GuiScreen {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		
+		EntityPlayerSP playerSP = (EntityPlayerSP) player;
+		
 		if (button.id == 0) {
 			
-			EntityPlayerSP playerSP = (EntityPlayerSP) player;
 			int chunkX = playerSP.chunkCoordX;
 			int chunkZ = playerSP.chunkCoordZ;
 			
-			Playground.playgroundChannel.sendToServer(new TestPacket(playerSP.getName(), chunkX, chunkZ));
+			Playground.playgroundChannel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
 		}
+			
 		
-		if (button.id == 1)
-			player.inventory.setInventorySlotContents(1, new ItemStack(PGItems.plot_deed));
+		if (button.id == 1) {
+			Playground.playgroundChannel.sendToServer(new PacketGiveDeed(playerSP.getName()));
+		}
 		
 		player.closeScreen();
 	}

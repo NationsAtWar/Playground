@@ -17,8 +17,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 import org.nationsatwar.playground.configuration.ConfigurationHandler;
-import org.nationsatwar.playground.init.TutorialBlocks;
-import org.nationsatwar.playground.init.PGItems;
+import org.nationsatwar.playground.events.KeyEvents;
+import org.nationsatwar.playground.events.PlotProtectionEvents;
+import org.nationsatwar.playground.gui.GUIHandler;
+import org.nationsatwar.playground.init.InitializeItems;
+import org.nationsatwar.playground.packets.PacketBuyPlot;
+import org.nationsatwar.playground.packets.PacketGiveDeed;
+import org.nationsatwar.playground.packets.PacketHandlerBuyPlot;
+import org.nationsatwar.playground.packets.PacketHandlerGiveDeed;
 import org.nationsatwar.playground.proxy.CommonProxy;
  
 @Mod(modid = Playground.MODID, name = Playground.MODNAME, version = Playground.MODVER)
@@ -42,7 +48,7 @@ public class Playground {
 	// <Key: plotOwner | Value: <Key: plotID | Value: int[0] = plotX, int[1] = plotZ>>
 	public static Map<String, Map<Integer, int[]>> plotKeys = new HashMap<String, Map<Integer, int[]>>();
 	
-	TutorialEventHandler handler = new TutorialEventHandler();
+	PlotProtectionEvents handler = new PlotProtectionEvents();
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -50,11 +56,8 @@ public class Playground {
 		FMLCommonHandler.instance().bus().register(handler);
 		MinecraftForge.EVENT_BUS.register(handler);
 		
-		TutorialBlocks.init();
-		TutorialBlocks.register();
-		PGItems.init();
-		
-		PGItems.register();
+		InitializeItems.init();
+		InitializeItems.register();
 		
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 	}
@@ -66,7 +69,8 @@ public class Playground {
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
 		playgroundChannel = NetworkRegistry.INSTANCE.newSimpleChannel(Playground.MODID);
-		playgroundChannel.registerMessage(TestPacketHandler.class, TestPacket.class, 1, Side.SERVER);
+		playgroundChannel.registerMessage(PacketHandlerBuyPlot.class, PacketBuyPlot.class, 1, Side.SERVER);
+		playgroundChannel.registerMessage(PacketHandlerGiveDeed.class, PacketGiveDeed.class, 2, Side.SERVER);
 		
 		proxy.registerKeybindings();
 		FMLCommonHandler.instance().bus().register(new KeyEvents());

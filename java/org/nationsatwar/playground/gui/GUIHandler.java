@@ -1,4 +1,4 @@
-package org.nationsatwar.playground;
+package org.nationsatwar.playground.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -18,7 +18,7 @@ public class GUIHandler implements IGuiHandler {
 			int x, int y, int z) {
 		
 		if (ID == 20)
-			return new GuiBasic(player, world, x, y, z);
+			return new PlotMenuGUI(player, world, x, y, z);
 		
 		return null;
 	}

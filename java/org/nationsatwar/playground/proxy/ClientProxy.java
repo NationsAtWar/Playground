@@ -5,9 +5,8 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
-import org.nationsatwar.playground.init.TutorialBlocks;
-import org.nationsatwar.playground.init.PGItems;
-import org.nationsatwar.utility.keybindings.KeyBindings;
+import org.nationsatwar.playground.init.InitializeItems;
+import org.nationsatwar.playground.utility.KeyBindings;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -16,8 +15,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenders() {
 		
-		TutorialBlocks.registerRenders();
-		PGItems.registerRenders();
+		InitializeItems.registerRenders();
 	}
 	
 	@Override

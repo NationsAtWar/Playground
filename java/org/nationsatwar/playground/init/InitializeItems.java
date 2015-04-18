@@ -1,37 +1,37 @@
 package org.nationsatwar.playground.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.items.PGItemPlotDeed;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import org.nationsatwar.playground.Playground;
-import org.nationsatwar.playground.blocks.BlockTest;
-
-public class TutorialBlocks {
+public class InitializeItems {
 	
-	public static Block test_block;
+	public static Item plot_deed;
 	
 	public static void init() {
 		
-		test_block = new BlockTest(Material.cloth).setUnlocalizedName("test_block");
+		plot_deed = new PGItemPlotDeed();
 	}
 	
 	public static void register() {
 		
-		GameRegistry.registerBlock(test_block, test_block.getUnlocalizedName().substring(5));
+		GameRegistry.registerItem(plot_deed, "plot_deed");
 	}
 	
 	public static void registerRenders() {
 		
-		registerRender(test_block);
+		registerRender(plot_deed);
 	}
 	
-	public static void registerRender(Block block) {
+	public static void registerRender(Item item) {
 		
-		Item item = Item.getItemFromBlock(block);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Playground.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 	}
 }

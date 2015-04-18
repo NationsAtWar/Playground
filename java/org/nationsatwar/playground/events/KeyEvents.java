@@ -1,7 +1,8 @@
-package org.nationsatwar.playground;
+package org.nationsatwar.playground.events;
 
 import org.lwjgl.input.Keyboard;
-import org.nationsatwar.playground.init.PGItems;
+import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.init.InitializeItems;
 import org.nationsatwar.playground.proxy.ClientProxy;
 
 import net.minecraft.client.Minecraft;
@@ -18,10 +19,7 @@ public class KeyEvents {
 		
 		if (ClientProxy.plotKey.isPressed()) {
 			
-			System.out.println(ClientProxy.plotKey.getKeyDescription() + " has been pressed!");
-			
-			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-			
+			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;			
 			player.openGui(Playground.instance, 20, player.getEntityWorld(), 0, 0, 0);
 		}
 	}

@@ -1,4 +1,4 @@
-package org.nationsatwar.utility.keybindings;
+package org.nationsatwar.playground.utility;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
