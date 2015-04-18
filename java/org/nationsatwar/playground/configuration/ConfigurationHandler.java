@@ -75,6 +75,7 @@ public class ConfigurationHandler {
 		}
 		
 		ChatMessage.sendMessage(player, "You have purchased this plot of land!");
+		player.inventory.decrStackSize(player.inventory.currentItem, 1);
 		
 		plotList.put(plotList.size(), newPlot);
 		

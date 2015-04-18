@@ -63,7 +63,31 @@ public class PlotMenuGUI extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
 		
 		this.mc.getTextureManager().bindTexture(backgroundimage);
+		
 		drawTexturedModalRect(windowX, windowY, 0, 0, windowWidth,  windowHeight);
+		
+		EntityPlayerSP playerSP = (EntityPlayerSP) player;
+		
+		int chunkX = playerSP.chunkCoordX;
+		int chunkZ = playerSP.chunkCoordZ;
+		
+		int offsetX = 144;
+		int offsetY = 130;
+		int gridSize = 13;
+		int gridSpacing = 15;
+		
+		for (int gridX = -3; gridX < 4; gridX++) {
+			for (int gridY = -3; gridY < 4; gridY++) {
+				
+				int gridColor = 0xFFFFFFFF;
+				
+				if (Playground.isPlotTaken(chunkX + gridX, chunkZ + gridY))
+					gridColor = 0x222222FF;
+				
+				drawRect(gridX * gridSpacing + offsetX, gridY * gridSpacing + offsetY, 
+						gridX * gridSpacing + offsetX + gridSize, gridY * gridSpacing + offsetY + gridSize, gridColor);
+			}
+		}
 		
 		drawString(fontRendererObj, "Plot Management", windowX + 10, windowY + 10, 0xEE8888);
 		
