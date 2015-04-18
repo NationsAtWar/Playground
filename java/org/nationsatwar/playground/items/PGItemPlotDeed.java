@@ -5,6 +5,7 @@ import java.util.List;
 import org.nationsatwar.playground.Playground;
 import org.nationsatwar.playground.packets.PacketBuyPlot;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,10 +36,7 @@ public class PGItemPlotDeed extends PGBasicItem {
 			
 		EntityPlayerSP playerSP = (EntityPlayerSP) playerIn;
 		
-		int chunkX = playerSP.chunkCoordX;
-		int chunkZ = playerSP.chunkCoordZ;
-		
-		Playground.playgroundChannel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
+		playerSP.openGui(Playground.instance, 21, playerSP.getEntityWorld(), 0, 0, 0);
 		
 		return true;
 	}

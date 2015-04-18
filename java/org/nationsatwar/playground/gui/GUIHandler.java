@@ -20,6 +20,9 @@ public class GUIHandler implements IGuiHandler {
 		if (ID == 20)
 			return new PlotMenuGUI(player, world, x, y, z);
 		
+		if (ID == 21)
+			return new ConfirmGUI(player, world, x, y, z);
+		
 		return null;
 	}
 }
