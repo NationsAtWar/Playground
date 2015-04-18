@@ -62,8 +62,8 @@ public class PlotMenuGUI extends GuiScreen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
 		
+		// Draws the background window
 		this.mc.getTextureManager().bindTexture(backgroundimage);
-		
 		drawTexturedModalRect(windowX, windowY, 0, 0, windowWidth,  windowHeight);
 		
 		EntityPlayerSP playerSP = (EntityPlayerSP) player;
@@ -72,20 +72,27 @@ public class PlotMenuGUI extends GuiScreen {
 		int chunkZ = playerSP.chunkCoordZ;
 		
 		int offsetX = 144;
-		int offsetY = 130;
+		int offsetZ = 130;
 		int gridSize = 13;
 		int gridSpacing = 15;
 		
+		// Draws a grid map based on player location that alerts the player to which plots are owned
 		for (int gridX = -3; gridX < 4; gridX++) {
-			for (int gridY = -3; gridY < 4; gridY++) {
+			for (int gridZ = -3; gridZ < 4; gridZ++) {
 				
 				int gridColor = 0xFFFFFFFF;
 				
-				if (Playground.isPlotTaken(chunkX + gridX, chunkZ + gridY))
-					gridColor = 0x222222FF;
+				// Change color if plot is taken
+				if (Playground.isPlotTaken(chunkX + gridX, chunkZ + gridZ))
+					gridColor = 0xCC6666FF;
 				
-				drawRect(gridX * gridSpacing + offsetX, gridY * gridSpacing + offsetY, 
-						gridX * gridSpacing + offsetX + gridSize, gridY * gridSpacing + offsetY + gridSize, gridColor);
+				// Increase transparency for player location
+				if (chunkX == chunkX + gridX && chunkZ == chunkZ + gridZ)
+					gridColor -= 0xAA000000;
+				
+				// Draws the grid
+				drawRect(gridX * gridSpacing + offsetX, gridZ * gridSpacing + offsetZ, 
+						gridX * gridSpacing + offsetX + gridSize, gridZ * gridSpacing + offsetZ + gridSize, gridColor);
 			}
 		}
 		
@@ -114,9 +121,8 @@ public class PlotMenuGUI extends GuiScreen {
 		}
 			
 		
-		if (button.id == 1) {
+		if (button.id == 1)
 			Playground.playgroundChannel.sendToServer(new PacketGiveDeed(playerSP.getName()));
-		}
 		
 		player.closeScreen();
 	}

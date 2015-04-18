@@ -25,7 +25,7 @@ public class PGItemPlotDeed extends PGBasicItem {
 		
 		super("plot_deed");
 		this.setUnlocalizedName("plot_deed");
-        this.maxStackSize = 1;
+        this.maxStackSize = 16;
 	}
 	
 	@Override
@@ -35,8 +35,9 @@ public class PGItemPlotDeed extends PGBasicItem {
 			return false;
 			
 		EntityPlayerSP playerSP = (EntityPlayerSP) playerIn;
-		
 		playerSP.openGui(Playground.instance, 21, playerSP.getEntityWorld(), 0, 0, 0);
+		
+		System.out.println(Playground.plotKeys.toString());
 		
 		return true;
 	}

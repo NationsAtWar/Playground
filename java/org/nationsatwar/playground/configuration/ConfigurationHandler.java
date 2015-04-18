@@ -37,13 +37,18 @@ public class ConfigurationHandler {
 			configuration.load();
 			
 			for (String playerName : configuration.getCategoryNames()) {
+
+				addPlotOwner(playerName);
 			
 				for (Property plotList : configuration.getCategory(playerName).getOrderedValues()) {
 					
 					int plotX = plotList.getIntList()[0];
 					int plotZ = plotList.getIntList()[1];
 					
-					addPlot(playerName, plotX, plotZ, false);
+					Map<Integer, int[]> playgroundList = Playground.plotKeys.get(playerName);
+					playgroundList.put(playgroundList.size(), new int[] {plotX, plotZ});
+					
+					//addPlot(playerName, plotX, plotZ, false);
 				}
 			}
 		} catch(Exception e) {
