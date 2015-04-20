@@ -1,10 +1,23 @@
 *.class
+/.git
+/.gradle
+/.settings
+/bin
+/build
+/eclipse
+/gradle
+
+.classpath
+.project
+.gradle
+build.gradle
+gradlew
+gradlew.bat
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
