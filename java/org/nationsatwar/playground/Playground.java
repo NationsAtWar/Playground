@@ -1,8 +1,5 @@
 package org.nationsatwar.playground;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +23,6 @@ import org.nationsatwar.playground.packets.PacketGiveDeed;
 import org.nationsatwar.playground.packets.PacketHandlerBuyPlot;
 import org.nationsatwar.playground.packets.PacketHandlerGiveDeed;
 import org.nationsatwar.playground.proxy.CommonProxy;
-import org.nationsatwar.playground.utility.ChatMessage;
  
 @Mod(modid = Playground.MODID, name = Playground.MODNAME, version = Playground.MODVER)
 public class Playground {
@@ -45,9 +41,6 @@ public class Playground {
 	public static final String SERVER_PROXY_CLASS = "org.nationsatwar.playground.proxy.CommonProxy";
 	
 	public static SimpleNetworkWrapper playgroundChannel;
-
-	// <Key: plotOwner | Value: <Key: plotID | Value: int[0] = plotX, int[1] = plotZ>>
-	public static Map<String, Map<Integer, int[]>> plotKeys = new HashMap<String, Map<Integer, int[]>>();
 	
 	PlotProtectionEvents handler = new PlotProtectionEvents();
 	
@@ -80,16 +73,5 @@ public class Playground {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
-	}
-	
-	public static boolean isPlotTaken(int plotX, int plotZ) {
-
-		// Check to see if the plot is already registered elsewhere
-		for (Map<Integer, int[]> plots : plotKeys.values())
-			for (int[] values : plots.values())
-				if (values[0] == plotX && values[1] == plotZ)
-					return true;
-		
-		return false;
 	}
 }

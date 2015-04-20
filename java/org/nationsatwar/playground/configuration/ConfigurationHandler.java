@@ -2,24 +2,15 @@ package org.nationsatwar.playground.configuration;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.nationsatwar.playground.Playground;
-import org.nationsatwar.playground.utility.ChatMessage;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import org.nationsatwar.playground.plots.PlotManager;
+import org.nationsatwar.playground.utility.ChatMessage;
 
 public class ConfigurationHandler {
 	
@@ -45,7 +36,7 @@ public class ConfigurationHandler {
 					int plotX = plotList.getIntList()[0];
 					int plotZ = plotList.getIntList()[1];
 					
-					Map<Integer, int[]> playgroundList = Playground.plotKeys.get(playerName);
+					Map<Integer, int[]> playgroundList = PlotManager.plotKeys.get(playerName);
 					playgroundList.put(playgroundList.size(), new int[] {plotX, plotZ});
 					
 					//addPlot(playerName, plotX, plotZ, false);
@@ -63,7 +54,7 @@ public class ConfigurationHandler {
 		
 		addPlotOwner(plotOwner);
 		
-		Map<Integer, int[]> plotList = Playground.plotKeys.get(plotOwner);
+		Map<Integer, int[]> plotList = PlotManager.plotKeys.get(plotOwner);
 
 		int[] newPlot = {plotX, plotZ};
 		
@@ -91,10 +82,10 @@ public class ConfigurationHandler {
 	public static void addPlotOwner(String plotOwner) {
 		
 		// Add Player as Plot Owner if not already registered
-		if (!Playground.plotKeys.containsKey(plotOwner)) {
+		if (!PlotManager.plotKeys.containsKey(plotOwner)) {
 
 			Map<Integer, int[]> plotList = new HashMap<Integer, int[]>();
-			Playground.plotKeys.put(plotOwner, plotList);
+			PlotManager.plotKeys.put(plotOwner, plotList);
 		}
 	}
 	

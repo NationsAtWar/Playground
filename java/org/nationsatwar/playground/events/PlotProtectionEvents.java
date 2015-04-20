@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.nationsatwar.playground.Playground;
 import org.nationsatwar.playground.init.InitializeItems;
+import org.nationsatwar.playground.plots.PlotManager;
 
 import akka.event.Logging.Debug;
 import net.minecraft.entity.item.EntityItem;
@@ -32,7 +33,7 @@ public class PlotProtectionEvents {
 		int chunkX = event.pos.getX() / 16;
 		int chunkZ = event.pos.getZ() / 16;
 		
-		for (Map<Integer, int[]> plotOwner : Playground.plotKeys.values()) {
+		for (Map<Integer, int[]> plotOwner : PlotManager.plotKeys.values()) {
 			
 			for (int[] plotKeys : plotOwner.values()) {
 				
@@ -55,7 +56,7 @@ public class PlotProtectionEvents {
 		int chunkX = event.pos.getX() / 16;
 		int chunkZ = event.pos.getZ() / 16;
 		
-		for (Map<Integer, int[]> plotOwner : Playground.plotKeys.values()) {
+		for (Map<Integer, int[]> plotOwner : PlotManager.plotKeys.values()) {
 			
 			for (int[] plotKeys : plotOwner.values()) {
 				

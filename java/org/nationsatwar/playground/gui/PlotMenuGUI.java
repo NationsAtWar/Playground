@@ -1,24 +1,16 @@
 package org.nationsatwar.playground.gui;
 
-import org.nationsatwar.playground.Playground;
-import org.nationsatwar.playground.init.InitializeItems;
-import org.nationsatwar.playground.items.PGItemPlotDeed;
-import org.nationsatwar.playground.packets.PacketBuyPlot;
-import org.nationsatwar.playground.packets.PacketGiveDeed;
-
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.S2FPacketSetSlot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import org.nationsatwar.playground.Playground;
+import org.nationsatwar.playground.packets.PacketBuyPlot;
+import org.nationsatwar.playground.packets.PacketGiveDeed;
+import org.nationsatwar.playground.plots.PlotManager;
 
 public class PlotMenuGUI extends GuiScreen {
 	
@@ -83,7 +75,7 @@ public class PlotMenuGUI extends GuiScreen {
 				int gridColor = 0xFFFFFFFF;
 				
 				// Change color if plot is taken
-				if (Playground.isPlotTaken(chunkX + gridX, chunkZ + gridZ))
+				if (PlotManager.isPlotTaken(chunkX + gridX, chunkZ + gridZ))
 					gridColor = 0xCC6666FF;
 				
 				// Increase transparency for player location
