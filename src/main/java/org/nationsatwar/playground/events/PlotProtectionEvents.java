@@ -12,12 +12,12 @@ public class PlotProtectionEvents {
 		
 		String player = event.getPlayer().getName();
 		
-		int chunkX = event.pos.getX() / 16;
-		int chunkZ = event.pos.getZ() / 16;
+		int chunkX = event.world.getChunkFromBlockCoords(event.pos).xPosition;
+		int chunkZ = event.world.getChunkFromBlockCoords(event.pos).zPosition;
 		
 		if (PlotManager.isPlotTaken(player, chunkX, chunkZ))
 			return;
-
+		
 		if (PlotManager.isPlotTaken(chunkX, chunkZ))
 			event.setCanceled(true);
 	}
@@ -27,8 +27,8 @@ public class PlotProtectionEvents {
 		
 		String player = event.player.getName();
 		
-		int chunkX = event.pos.getX() / 16;
-		int chunkZ = event.pos.getZ() / 16;
+		int chunkX = event.world.getChunkFromBlockCoords(event.pos).xPosition;
+		int chunkZ = event.world.getChunkFromBlockCoords(event.pos).zPosition;
 		
 		if (PlotManager.isPlotTaken(player, chunkX, chunkZ))
 			return;

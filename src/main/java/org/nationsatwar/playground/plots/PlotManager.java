@@ -3,23 +3,33 @@ package org.nationsatwar.playground.plots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
+import org.nationsatwar.playground.database.DatabaseHandler;
 
 public class PlotManager {
 	
 	private static List<PlotObject> plots = new ArrayList<PlotObject>();
 	
+	/**
+	 * Adds plot to instance as well as database
+	 * 
+	 * @param owner
+	 * @param plotX
+	 * @param plotZ
+	 */
 	public static void addPlot(String owner, int plotX, int plotZ) {
 		
 		PlotObject newPlot = new PlotObject(plots.size(), owner, plotX, plotZ);
 		plots.add(newPlot);
 		
-		try { addtoDatabase(newPlot); }
-		catch (Exception e) { System.out.println(e.getMessage()); }
+		DatabaseHandler.addtoDatabase(newPlot);
+	}
+	
+	/**
+	 * Loads all plots from the database to the mod instance
+	 */
+	public static void loadPlots() {
+		
+		plots = DatabaseHandler.loadFromDatabase();
 	}
 	
 	/**
@@ -31,9 +41,17 @@ public class PlotManager {
 	 */
 	public static boolean isPlotTaken(int plotX, int plotZ) {
 		
-		for (PlotObject plot : plots)
+		System.out.println("plotX = " + plotX);
+		System.out.println("plotZ = " + plotZ);
+		
+		for (PlotObject plot : plots) {
+
+			System.out.println(plot.getPlotX());
+			System.out.println(plot.getPlotZ());
+			
 			if (plot.getPlotX() == plotX && plot.getPlotZ() == plotZ)
 				return true;
+		}
 		
 		return false;
 	}
@@ -54,22 +72,4 @@ public class PlotManager {
 		
 		return false;
 	}
-	
-	private static void addtoDatabase(PlotObject newPlot) throws Exception {
-		
-		String databaseUrl = "jdbc:mysql://localhost:3306/test?user=root&password=mountdew4";
-		
-		// create a connection source to our database
-		ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl);
-		
-		// instantiate the dao
-		Dao<PlotObject, String> accountDao = DaoManager.createDao(connectionSource, PlotObject.class);
-		
-		// if you need to create the 'accounts' table make this call
-		TableUtils.createTable(connectionSource, PlotObject.class);
-		
-		accountDao.create(newPlot);
-		
-		connectionSource.close();
-    }
 }

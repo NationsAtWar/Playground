@@ -1,4 +1,4 @@
-package org.nationsatwar.playground.database;
+package org.nationsatwar.playground.configuration;
 
 import java.io.File;
 
@@ -11,11 +11,13 @@ import org.nationsatwar.playground.utility.ChatMessage;
 
 public class ConfigurationHandler {
 	
-	public static Configuration configuration;
+	private static Configuration configuration;
 	
-	// <Key: plotOwner | Value: <Key: plotID | Value: int[0] = plotX, int[1] = plotZ>>
+	private static String database;
+	private static String username;
+	private static String password;
 	
-	public static void init(File configFile) {
+	public static void reloadConfig(File configFile) {
 		
 		// Create the configuration object from the given configuration file
 		configuration = new Configuration(configFile);
@@ -23,12 +25,31 @@ public class ConfigurationHandler {
 		try {
 			// Load the configuration file
 			configuration.load();
+			
+			database = configuration.get("Settings", "Database", "mydb").getString();
+			username = configuration.get("Settings", "Username", "username").getString();
+			password = configuration.get("Settings", "Password", "password").getString();
 		} catch(Exception e) {
 			System.out.println("ERROR ERROR! " + e.getMessage());
 		} finally {
 			// Save the configuration file
 			configuration.save();
 		}
+	}
+	
+	public static String getDatabaseUrl() {
+
+		// "jdbc:mysql://localhost:3306/test?user=root&password=mountdew4";
+		
+		String databaseUrl = "jdbc:mysql://localhost:3306/";
+		
+		databaseUrl += database;
+		databaseUrl += "?user=" + username;
+		databaseUrl += "&password=" + password;
+		
+		System.out.println(databaseUrl);
+		
+		return databaseUrl;
 	}
 	
 	public static void addPlot(String plotOwner, int plotX, int plotZ, boolean updateConfig) {

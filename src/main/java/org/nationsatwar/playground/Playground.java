@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-import org.nationsatwar.playground.database.ConfigurationHandler;
+import org.nationsatwar.playground.configuration.ConfigurationHandler;
 import org.nationsatwar.playground.events.KeyEvents;
 import org.nationsatwar.playground.events.PlotProtectionEvents;
 import org.nationsatwar.playground.gui.GUIHandler;
@@ -22,6 +22,7 @@ import org.nationsatwar.playground.packets.PacketBuyPlot;
 import org.nationsatwar.playground.packets.PacketGiveDeed;
 import org.nationsatwar.playground.packets.PacketHandlerBuyPlot;
 import org.nationsatwar.playground.packets.PacketHandlerGiveDeed;
+import org.nationsatwar.playground.plots.PlotManager;
 import org.nationsatwar.playground.proxy.CommonProxy;
  
 @Mod(modid = Playground.MODID, name = Playground.MODNAME, version = Playground.MODVER)
@@ -53,7 +54,7 @@ public class Playground {
 		InitializeItems.init();
 		InitializeItems.register();
 		
-		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+		ConfigurationHandler.reloadConfig(event.getSuggestedConfigurationFile());
 	}
 	
 	@EventHandler
@@ -73,5 +74,6 @@ public class Playground {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
+		PlotManager.loadPlots();
 	}
 }

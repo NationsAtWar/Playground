@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import org.nationsatwar.playground.database.ConfigurationHandler;
+import org.nationsatwar.playground.configuration.ConfigurationHandler;
 
 public class PacketHandlerBuyPlot implements IMessageHandler<PacketBuyPlot, IMessage> {
 
