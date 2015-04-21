@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import org.nationsatwar.palette.ChatMessage;
 import org.nationsatwar.playground.plots.PlotManager;
-import org.nationsatwar.playground.utility.ChatMessage;
 
 public class ConfigurationHandler {
 	
