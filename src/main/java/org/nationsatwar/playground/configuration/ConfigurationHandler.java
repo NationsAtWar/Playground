@@ -5,9 +5,11 @@ import java.io.File;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+
+import org.nationsatwar.playground.plots.PlotManager;
 
 import org.nationsatwar.palette.ChatMessage;
-import org.nationsatwar.playground.plots.PlotManager;
 
 public class ConfigurationHandler {
 	
@@ -59,14 +61,21 @@ public class ConfigurationHandler {
 		// Check to see if the plot is already registered by the player
 		if (PlotManager.isPlotTaken(plotOwner, plotX, plotZ)) {
 			
-			ChatMessage.sendMessage(player, "You already have this plot!");
+			if (Loader.isModLoaded("palette"))
+				ChatMessage.sendMessage(player, "You already have this plot!");
+			else
+				System.out.println("lol");
 			return;
 		}
 
 		// Check to see if the plot is already registered by anyone else
 		if (PlotManager.isPlotTaken(plotX, plotZ)) {
+
+			if (Loader.isModLoaded("palette"))
+				ChatMessage.sendMessage(player, "This plot is already owned!");
+			else
+				System.out.println("lol");
 			
-			ChatMessage.sendMessage(player, "This plot is already owned!");
 			return;
 		}
 		

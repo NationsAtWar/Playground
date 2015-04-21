@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "plots")
 public class PlotObject {
 	
-	@DatabaseField(id = true)
+	@DatabaseField(generatedId = true)
 	private int id;
 
 	@DatabaseField
@@ -18,9 +18,8 @@ public class PlotObject {
 	
 	public PlotObject() {}
 	
-	public PlotObject(int id, String owner, int plotX, int plotZ) {
+	public PlotObject(String owner, int plotX, int plotZ) {
 		
-		this.id = id;
 		this.owner = owner;
 		this.plotX = plotX;
 		this.plotZ = plotZ;

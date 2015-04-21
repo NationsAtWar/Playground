@@ -18,7 +18,7 @@ public class PlotManager {
 	 */
 	public static void addPlot(String owner, int plotX, int plotZ) {
 		
-		PlotObject newPlot = new PlotObject(plots.size(), owner, plotX, plotZ);
+		PlotObject newPlot = new PlotObject(owner, plotX, plotZ);
 		plots.add(newPlot);
 		
 		DatabaseHandler.addtoDatabase(newPlot);

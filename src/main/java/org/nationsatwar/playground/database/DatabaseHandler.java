@@ -26,7 +26,7 @@ public class DatabaseHandler {
 			Dao<PlotObject, String> accountDao = DaoManager.createDao(connectionSource, PlotObject.class);
 			
 			// if you need to create the 'accounts' table make this call
-			TableUtils.createTable(connectionSource, PlotObject.class);
+			TableUtils.createTableIfNotExists(connectionSource, PlotObject.class);
 			
 			accountDao.create(newPlot);
 			

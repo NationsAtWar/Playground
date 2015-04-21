@@ -3,8 +3,9 @@ package org.nationsatwar.playground.proxy;
 import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
-import org.nationsatwar.palette.KeyBindings;
 import org.nationsatwar.playground.init.InitializeItems;
+
+import org.nationsatwar.palette.KeyBindings;
 
 public class ClientProxy extends CommonProxy {
 	
