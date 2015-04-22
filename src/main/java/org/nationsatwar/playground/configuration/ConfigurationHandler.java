@@ -7,9 +7,8 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 
+import org.nationsatwar.palette.chat.ChatMessage;
 import org.nationsatwar.playground.plots.PlotManager;
-
-import org.nationsatwar.palette.ChatMessage;
 
 public class ConfigurationHandler {
 	
@@ -40,8 +39,6 @@ public class ConfigurationHandler {
 	}
 	
 	public static String getDatabaseUrl() {
-
-		// "jdbc:mysql://localhost:3306/test?user=root&password=mountdew4";
 		
 		String databaseUrl = "jdbc:mysql://localhost:3306/";
 		
