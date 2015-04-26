@@ -41,7 +41,7 @@ public class Playground {
 	public static final String CLIENT_PROXY_CLASS = "org.nationsatwar.playground.proxy.ClientProxy";
 	public static final String SERVER_PROXY_CLASS = "org.nationsatwar.playground.proxy.CommonProxy";
 	
-	public static SimpleNetworkWrapper playgroundChannel;
+	public static SimpleNetworkWrapper channel;
 	
 	PlotProtectionEvents handler = new PlotProtectionEvents();
 	
@@ -55,6 +55,11 @@ public class Playground {
 		InitializeItems.register();
 		
 		ConfigurationHandler.reloadConfig(event.getSuggestedConfigurationFile());
+		
+		// Packet Registration
+		channel = NetworkRegistry.INSTANCE.newSimpleChannel(Playground.MODID);
+		channel.registerMessage(PacketHandlerBuyPlot.class, PacketBuyPlot.class, 1, Side.SERVER);
+		channel.registerMessage(PacketHandlerGiveDeed.class, PacketGiveDeed.class, 2, Side.SERVER);
 	}
 	
 	@EventHandler
@@ -63,9 +68,6 @@ public class Playground {
 		proxy.registerRenders();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
-		playgroundChannel = NetworkRegistry.INSTANCE.newSimpleChannel(Playground.MODID);
-		playgroundChannel.registerMessage(PacketHandlerBuyPlot.class, PacketBuyPlot.class, 1, Side.SERVER);
-		playgroundChannel.registerMessage(PacketHandlerGiveDeed.class, PacketGiveDeed.class, 2, Side.SERVER);
 		
 		proxy.registerKeybindings();
 		FMLCommonHandler.instance().bus().register(new KeyEvents());

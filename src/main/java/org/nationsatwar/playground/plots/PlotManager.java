@@ -41,13 +41,7 @@ public class PlotManager {
 	 */
 	public static boolean isPlotTaken(int plotX, int plotZ) {
 		
-		System.out.println("plotX = " + plotX);
-		System.out.println("plotZ = " + plotZ);
-		
 		for (PlotObject plot : plots) {
-
-			System.out.println(plot.getPlotX());
-			System.out.println(plot.getPlotZ());
 			
 			if (plot.getPlotX() == plotX && plot.getPlotZ() == plotZ)
 				return true;

@@ -99,17 +99,18 @@ public class PlotMenuGUI extends GuiScreen {
 		
 		EntityPlayerSP playerSP = (EntityPlayerSP) player;
 		
+		// Buy Plot
 		if (button.id == 0) {
 			
 			int chunkX = playerSP.chunkCoordX;
 			int chunkZ = playerSP.chunkCoordZ;
 			
-			Playground.playgroundChannel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
+			Playground.channel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
 		}
-			
 		
+		// Gives Plot Deed
 		if (button.id == 1)
-			Playground.playgroundChannel.sendToServer(new PacketGiveDeed(playerSP.getName()));
+			Playground.channel.sendToServer(new PacketGiveDeed(playerSP.getName()));
 		
 		player.closeScreen();
 	}

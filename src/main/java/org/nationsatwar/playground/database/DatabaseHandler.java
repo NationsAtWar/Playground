@@ -32,7 +32,7 @@ public class DatabaseHandler {
 			
 			connectionSource.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("What" + e);
 		}
     }
 	

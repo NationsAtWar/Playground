@@ -3,8 +3,8 @@ package org.nationsatwar.playground.configuration;
 import java.io.File;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 
 import org.nationsatwar.palette.chat.ChatMessage;
@@ -46,14 +46,12 @@ public class ConfigurationHandler {
 		databaseUrl += "?user=" + username;
 		databaseUrl += "&password=" + password;
 		
-		System.out.println(databaseUrl);
-		
 		return databaseUrl;
 	}
 	
 	public static void addPlot(String plotOwner, int plotX, int plotZ, boolean updateConfig) {
 		
-		EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().getPlayerByUsername(plotOwner);
+		EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(plotOwner);
 		
 		// Check to see if the plot is already registered by the player
 		if (PlotManager.isPlotTaken(plotOwner, plotX, plotZ)) {

@@ -67,12 +67,13 @@ public class ConfirmGUI extends GuiScreen {
 		
 		EntityPlayerSP playerSP = (EntityPlayerSP) player;
 		
+		// Confirm Button - Buys Plot
 		if (button.id == 0) {
 			
 			int chunkX = playerSP.chunkCoordX;
 			int chunkZ = playerSP.chunkCoordZ;
 			
-			Playground.playgroundChannel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
+			Playground.channel.sendToServer(new PacketBuyPlot(playerSP.getName(), chunkX, chunkZ));
 		}
 		
 		player.closeScreen();
