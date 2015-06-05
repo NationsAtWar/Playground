@@ -13,8 +13,4 @@ public class PGBasicItem extends Item {
 		setCreativeTab(CreativeTabs.tabMisc);
 		setMaxStackSize(64);
 	}
-	
-	// Make item not disappear on item use on block
-	// Make Utility API
-	// Make GUI Confirmation Screen
 }
